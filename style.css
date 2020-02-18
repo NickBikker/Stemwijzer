@@ -1,0 +1,11 @@
+body{
+    background-image: url('img/background.jpg');
+}
+
+#maindiv{
+    background-color: white;
+}
+
+#stelling{
+    text-align: center;
+}
