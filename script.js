@@ -12,6 +12,8 @@ eensbtn.style.display = 'none';
 backbtn.style.display = 'none';
 partijbtn.style.display = 'none';
 finishbtn.style.display = 'none';
+resultbtn.style.display = 'none';
+partijen.style.display = 'none';
 
 
 
@@ -62,7 +64,13 @@ function terug() {
 
 function partijmening() {
 
-    partijbox = document.getElementById('partijen');
+    if (partijen.style.display === "none") {
+        partijen.style.display = "block";
+    } else {
+        partijen.style.display = "none";
+    }
+
+
 
     subjects[vraag]['parties'].forEach(function (value, key) {
         var PartyName = document.createElement('h1');
@@ -71,9 +79,9 @@ function partijmening() {
         PartyName.innerText = "Partij: " + value['name'];
         PartyPosition.innerText = "Positie: " + value['position'];
         PartyOpinion.innerText = value['opinion'];
-        partijbox.appendChild(PartyName);
-        partijbox.appendChild(PartyPosition);
-        partijbox.appendChild(PartyOpinion);
+        partijen.appendChild(PartyName);
+        partijen.appendChild(PartyPosition);
+        partijen.appendChild(PartyOpinion);
 
 
 
@@ -82,7 +90,8 @@ function partijmening() {
 }
 
 finish = () => {
-    var vraagid = 0
+    console.log(votes);
+    var vraagid = 0;
     oneensbtn.style.display = 'none';
     geenbtn.style.display = 'none';
     eensbtn.style.display = 'none';
@@ -91,14 +100,16 @@ finish = () => {
     finishbtn.style.display = 'none';
     titel.style.display = 'none';
     mening.style.display = 'none';
+    resultbtn.style.display = 'inline-block';
     subjects.forEach(function(value){
         var vraagtitel = document.createElement('p');
-        var vraagtitel2 = document.createElement('a');
         vraagtitel.setAttribute('id', vraagid);
         vraagtitel.innerText = value['title'];
-        vraagtitel2.onclick = weighted;
-        maindiv.appendChild(vraagtitel);
-        vraagtitel.appendChild(vraagtitel2);
+        vraagtitel.addEventListener( 'click', function(){
+            var elemid = vraagtitel.getAttribute('id')
+            weighted(elemid)
+          } );
+        titeldiv.appendChild(vraagtitel);
         vraagid++;
     })
 
@@ -106,7 +117,22 @@ finish = () => {
  
 
 function weighted(vraagid){
-console.log(vraagid);
+    if(weightedquestions.indexOf(vraagid) == -1){
+        weightedquestions.push(vraagid);
+    }else{
+        var remove = weightedquestions.indexOf(vraagid);
+        weightedquestions.splice(remove, 1);
+    }
+    console.log(weightedquestions);
+
+
+
+
+}
+
+function results() {
+
+    console.log('ik was hier')
 
 }
 
