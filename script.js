@@ -6,6 +6,35 @@ var vraag = 0;
 var votes = [];
 var weightedquestions = []
 
+var pointsToParty = {
+    "PVV": 0,
+    "SP": 0,
+    "D66": 0,
+    "GroenLinks": 0,
+    "Partij voor de Dieren": 0,
+    "50Plus": 0,
+    "VNL": 0,
+    "Nieuwe Wegen": 0,
+    "Forum voor Democratie": 0,
+    "De Burger Beweging": 0,
+    "Vrijzinnige Partij": 0,
+    "Piratenpartij": 0,
+    "Libertarische Partij": 0,
+    "Lokaal in de Kamer": 0,
+    "Niet Stemmers": 0,
+    "VVD": 0,
+    "PvdA": 0,
+    "CDA": 0,
+    "ChristenUnie": 0,
+    "SGP": 0,
+    "OndernemersPartij": 0,
+    "DENK": 0,
+    "Artikel 1": 0
+}
+
+
+
+
 oneensbtn.style.display = 'none';
 geenbtn.style.display = 'none';
 eensbtn.style.display = 'none';
@@ -101,25 +130,25 @@ finish = () => {
     titel.style.display = 'none';
     mening.style.display = 'none';
     resultbtn.style.display = 'inline-block';
-    subjects.forEach(function(value){
+    subjects.forEach(function (value) {
         var vraagtitel = document.createElement('p');
         vraagtitel.setAttribute('id', vraagid);
         vraagtitel.innerText = value['title'];
-        vraagtitel.addEventListener( 'click', function(){
+        vraagtitel.addEventListener('click', function () {
             var elemid = vraagtitel.getAttribute('id')
             weighted(elemid)
-          } );
+        });
         titeldiv.appendChild(vraagtitel);
         vraagid++;
     })
 
 }
- 
 
-function weighted(vraagid){
-    if(weightedquestions.indexOf(vraagid) == -1){
+
+function weighted(vraagid) {
+    if (weightedquestions.indexOf(vraagid) == -1) {
         weightedquestions.push(vraagid);
-    }else{
+    } else {
         var remove = weightedquestions.indexOf(vraagid);
         weightedquestions.splice(remove, 1);
     }
@@ -131,9 +160,30 @@ function weighted(vraagid){
 }
 
 function results() {
+    titeldiv.style.display = 'none';
 
-    console.log('ik was hier')
+    for (var i = 0; i < 30; i++) {
+        for (var a = 0; a < 23; a++) {
+            if (votes[i] == subjects[i]["parties"][a]["position"]) {
+                if (weightedquestions.indexOf(i) != -1) {
+                    var point = subjects[i]["parties"][a]["name"];
+                    pointsToParty[point]+=2;
+                    console.log("dubbel")
+                }else{
+                    var point = subjects[i]["parties"][a]["name"];
+                    pointsToParty[point]++;
+                    console.log("test");
+                }
+                
+            };
+        };
+    };
+    console.log(pointsToParty)
+};
 
-}
+console.log(subjects[0]["parties"][0]["position"])
+
+
+
 
 
