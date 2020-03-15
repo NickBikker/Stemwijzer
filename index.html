@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -13,28 +14,27 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 mt-5" id="maindiv">
+            <div class="col-md-12" id="maindiv">
                 <div class="text-center">
                     <h1 id="titel"></h1>
                     <p id="mening"></p>
                 </div>
                 <div class="text-center">
                     <button id="startbtn" class="btn btn-dark" onclick="start()">Starten</button>
+                    <button id="backbtn" class="btn btn-dark" onclick="terug()"><i class="fa fa-arrow-left" aria-hidden="true"></i>terug</button> 
                     <button id="oneensbtn" class="btn btn-dark" onclick="stem('contra')">Oneens</button>
                     <button id="geenbtn" class="btn btn-dark" onclick="stem('none')">Geen mening</button>
                     <button id="eensbtn" class="btn btn-dark" onclick="stem('pro')">Eens</button>
-                    <button id="backbtn" class="btn btn-dark" onclick="terug()">terug</button>   
                     <button id="finishbtn" class="btn btn-dark" onclick="finish()">Klaar</button>   
                     <button id="partijbtn" class="btn btn-dark" onclick="partijmening()">mening</button>
                     <button id="resultbtn" class="btn btn-dark" onclick="results()">klaar</button>                  
                 </div>
                 <div class="row">
                     <div class="col-md-12" id="partijen">
-                
                     </div>
                     <div class="col-md-12" id="titeldiv">
-
-
+                    </div>
+                    <div class="col-md-12" id="resultdiv">
                     </div>
                     
 
