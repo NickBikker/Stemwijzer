@@ -167,21 +167,42 @@ function results() {
             if (votes[i] == subjects[i]["parties"][a]["position"]) {
                 if (weightedquestions.indexOf(i) != -1) {
                     var point = subjects[i]["parties"][a]["name"];
-                    pointsToParty[point]+=2;
+                    pointsToParty[point] += 2;
                     console.log("dubbel")
-                }else{
+                } else {
                     var point = subjects[i]["parties"][a]["name"];
                     pointsToParty[point]++;
                     console.log("test");
                 }
-                
+
             };
         };
     };
-    console.log(pointsToParty)
+    printResult(pointsToParty)
 };
 
-console.log(subjects[0]["parties"][0]["position"])
+printResult = () => {
+    console.log()
+    var names = Object.keys(pointsToParty);
+    var points = Object.values(pointsToParty)
+    console.log(names, points)
+
+    for (a = 0; a < Object.keys(pointsToParty).length; a++) {
+        var i = document.createElement('p');
+        i.innerHTML = names[a] + ": " + points[a]
+        resultdiv.appendChild(i)
+    }
+
+
+}
+
+
+
+
+
+
+
+/* console.log(subjects[0]["parties"][0]["position"]) */
 
 
 
