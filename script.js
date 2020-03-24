@@ -6,6 +6,8 @@ var vraag = 0;
 var votes = [];
 var weightedquestions = []
 
+const partiesSize = 5;
+
 var pointsToParty = {
     "PVV": 0,
     "SP": 0,
@@ -34,7 +36,8 @@ var pointsToParty = {
 
 
 
-
+bigPartiesButton.style.display = "none";
+secularPartiesButton.style.display = "none";
 oneensbtn.style.display = 'none';
 geenbtn.style.display = 'none';
 eensbtn.style.display = 'none';
@@ -48,12 +51,16 @@ partijen.style.display = 'none';
 
 start = () => {
     startbtn.style.display = 'none';
+    bigPartiesButton.style.display = "inline-block";
+    secularPartiesButton.style.display = "inline-block";
     oneensbtn.style.display = 'inline-block';
     geenbtn.style.display = 'inline-block';
     eensbtn.style.display = 'inline-block';
     backbtn.style.display = 'inline-block';
     partijbtn.style.display = 'inline-block';
     laadvraag(vraag);
+    loadBigParties();
+    loadSecularParties();
 }
 
 
@@ -118,9 +125,67 @@ function partijmening() {
 
 }
 
+function toggleAllParties(button) {
+    if (button === 'big') {
+       bigParties.style.display = "block";
+       secularParties.style.display = "none";
+   } else if (button === 'secular') {
+       bigParties.style.display = "none";
+       secularParties.style.display = "block";
+   }
+}
+
+function loadBigParties() {
+    var i = 0;
+    parties.forEach(function () {
+            if (parties[i]['size'] >= partiesSize) {
+                partyName = document.createElement('h5');
+                partyLong = document.createElement('p');
+
+                partyName.innerText = parties[i]['name'];
+
+                if (parties[i]['long']) {
+                    partyLong.innerText = parties[i]['long'];
+                }
+
+                bigParties.appendChild(partyName);
+                bigParties.appendChild(partyLong);
+                i++;
+            }
+        }
+    );
+}
+
+function loadSecularParties() {
+    var i = 0;
+    parties.forEach(function () {
+            if (parties[i]['secular'] === true) {
+                partyName = document.createElement('h5');
+                partyLong = document.createElement('p');
+
+                partyName.innerText = parties[i]['name'];
+
+                if (parties[i]['long']) {
+                    partyLong.innerText = parties[i]['long'];
+                }
+
+                secularParties.appendChild(partyName);
+                secularParties.appendChild(partyLong);
+                i++;
+            } else {
+                i++;
+            }
+        }
+    );
+}
+
 finish = () => {
     console.log(votes);
     var vraagid = 0;
+    bigParties.style.display = "none";
+       secularParties.style.display = "none";
+       bigPartiesButton.style.display = "none";
+       secularPartiesButton.style.display = "none";
     oneensbtn.style.display = 'none';
     geenbtn.style.display = 'none';
     eensbtn.style.display = 'none';
@@ -182,14 +247,16 @@ function results() {
 };
 
 printResult = () => {
+    keysSorted = Object.entries(pointsToParty).sort((a,b) => b[1]-a[1]).map(el=>el[0]);
+    console.log(keysSorted);
+    
     console.log()
-    var names = Object.keys(pointsToParty);
-    var points = Object.values(pointsToParty)
-    console.log(names, points)
+    var names = Object.values(keysSorted)
+    console.log(names)
 
-    for (a = 0; a < Object.keys(pointsToParty).length; a++) {
+    for (a = 0; a < Object.keys(keysSorted).length; a++) {
         var i = document.createElement('p');
-        i.innerHTML = names[a] + ": " + points[a]
+        i.innerHTML = names[a];
         resultdiv.appendChild(i)
     }
 

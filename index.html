@@ -27,6 +27,8 @@
                     <button id="eensbtn" class="btn btn-dark" onclick="stem('pro')">Eens</button>
                     <button id="finishbtn" class="btn btn-dark" onclick="finish()">Klaar</button>   
                     <button id="partijbtn" class="btn btn-dark" onclick="partijmening()">mening</button>
+                    <button id="bigPartiesButton" onclick="toggleAllParties('big')" class="btn btn-dark m-3">Zie de grote partijen.</button>
+                    <button id="secularPartiesButton" onclick="toggleAllParties('secular')" class="btn btn-dark m-3">Zie de seculiere partijen.</button>
                     <button id="resultbtn" class="btn btn-dark" onclick="results()">klaar</button>                  
                 </div>
                 <div class="row">
@@ -36,12 +38,17 @@
                     </div>
                     <div class="col-md-12" id="resultdiv">
                     </div>
-                    
 
+                </div>
+                <div id="bigParties" style="display: none;">
+                </div>
+            
+                <div id="secularParties" style="display: none;">
+                </div>
+           
                 </div>
             </div>
         </div>
-    </div>
 
     <script src="data.js"></script>
     <script src="script.js"></script>
