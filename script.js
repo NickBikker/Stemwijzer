@@ -46,6 +46,8 @@ partijbtn.style.display = 'none';
 finishbtn.style.display = 'none';
 resultbtn.style.display = 'none';
 partijen.style.display = 'none';
+titeldiv.style.display = 'none';
+resultdiv.style.display = 'none';
 
 
 
@@ -127,65 +129,66 @@ function partijmening() {
 
 function toggleAllParties(button) {
     if (button === 'big') {
-       bigParties.style.display = "block";
-       secularParties.style.display = "none";
-   } else if (button === 'secular') {
-       bigParties.style.display = "none";
-       secularParties.style.display = "block";
-   }
+        bigParties.style.display = "block";
+        secularParties.style.display = "none";
+    } else if (button === 'secular') {
+        bigParties.style.display = "none";
+        secularParties.style.display = "block";
+    }
 }
 
 function loadBigParties() {
     var i = 0;
     parties.forEach(function () {
-            if (parties[i]['size'] >= partiesSize) {
-                partyName = document.createElement('h5');
-                partyLong = document.createElement('p');
+        if (parties[i]['size'] >= partiesSize) {
+            partyName = document.createElement('h5');
+            partyLong = document.createElement('p');
 
-                partyName.innerText = parties[i]['name'];
+            partyName.innerText = parties[i]['name'];
 
-                if (parties[i]['long']) {
-                    partyLong.innerText = parties[i]['long'];
-                }
-
-                bigParties.appendChild(partyName);
-                bigParties.appendChild(partyLong);
-                i++;
+            if (parties[i]['long']) {
+                partyLong.innerText = parties[i]['long'];
             }
+
+            bigParties.appendChild(partyName);
+            bigParties.appendChild(partyLong);
+            i++;
         }
+    }
     );
 }
 
 function loadSecularParties() {
     var i = 0;
     parties.forEach(function () {
-            if (parties[i]['secular'] === true) {
-                partyName = document.createElement('h5');
-                partyLong = document.createElement('p');
+        if (parties[i]['secular'] === true) {
+            partyName = document.createElement('h5');
+            partyLong = document.createElement('p');
 
-                partyName.innerText = parties[i]['name'];
+            partyName.innerText = parties[i]['name'];
 
-                if (parties[i]['long']) {
-                    partyLong.innerText = parties[i]['long'];
-                }
-
-                secularParties.appendChild(partyName);
-                secularParties.appendChild(partyLong);
-                i++;
-            } else {
-                i++;
+            if (parties[i]['long']) {
+                partyLong.innerText = parties[i]['long'];
             }
+
+            secularParties.appendChild(partyName);
+            secularParties.appendChild(partyLong);
+            i++;
+        } else {
+            i++;
         }
+    }
     );
 }
 
 finish = () => {
     console.log(votes);
     var vraagid = 0;
+    titeldiv.style.display = 'block';
     bigParties.style.display = "none";
-       secularParties.style.display = "none";
-       bigPartiesButton.style.display = "none";
-       secularPartiesButton.style.display = "none";
+    secularParties.style.display = "none";
+    bigPartiesButton.style.display = "none";
+    secularPartiesButton.style.display = "none";
     oneensbtn.style.display = 'none';
     geenbtn.style.display = 'none';
     eensbtn.style.display = 'none';
@@ -198,9 +201,11 @@ finish = () => {
     subjects.forEach(function (value) {
         var vraagtitel = document.createElement('p');
         vraagtitel.setAttribute('id', vraagid);
+        vraagtitel.classList.add('titels')
         vraagtitel.innerText = value['title'];
         vraagtitel.addEventListener('click', function () {
             var elemid = vraagtitel.getAttribute('id')
+            vraagtitel.classList.toggle('clicked')
             weighted(elemid)
         });
         titeldiv.appendChild(vraagtitel);
@@ -226,6 +231,7 @@ function weighted(vraagid) {
 
 function results() {
     titeldiv.style.display = 'none';
+    resultdiv.style.display = 'block';
 
     for (var i = 0; i < 30; i++) {
         for (var a = 0; a < 23; a++) {
@@ -247,9 +253,9 @@ function results() {
 };
 
 printResult = () => {
-    keysSorted = Object.entries(pointsToParty).sort((a,b) => b[1]-a[1]).map(el=>el[0]);
+    keysSorted = Object.entries(pointsToParty).sort((a, b) => b[1] - a[1]).map(el => el[0]);
     console.log(keysSorted);
-    
+
     console.log()
     var names = Object.values(keysSorted)
     console.log(names)

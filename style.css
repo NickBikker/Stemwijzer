@@ -1,5 +1,12 @@
 body{
     background-image: url('img/background.jpg');
+    font-family: 'Poppins', sans-serif;
+
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 #maindiv{
@@ -10,4 +17,13 @@ body{
 
 #stelling{
     text-align: center;
+}
+
+.clicked{
+    color: red;
+}
+
+.titels{
+    
+
 }
